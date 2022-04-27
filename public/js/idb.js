@@ -3,27 +3,27 @@
 let db;
 const request = indexedDB.open('budget_tracker', 1);
 
-request.onupgradeneeded = function(event) {
+request.onupgradeneeded = function (event) {
     const db = event.target.result;
     db.createObjectStore('new_transaction', { autoIncrement: true });
 };
 // upon success
-request.onsuccess = function(event) {
+request.onsuccess = function (event) {
     db = event.target.result;
 
     if (navigator.onLine) {
-        uploadtransaction();
+        uploadTransaction();
     }
 };
 // checks for errors
-request.onerror = function(event) {
+request.onerror = function (event) {
     console.log(event.target.errorCode);
 };
 
 // set up the functionality for writing data to it
 function saveRecord(record) {
     const transaction = db.transaction(['new_transaction'], 'readwrite');
-const transactionObjectStore = transaction.objectStore('new_transaction');
+    const transactionObjectStore = transaction.objectStore('new_transaction');
     transactionObjectStore.add(record);
 }
 
@@ -32,28 +32,28 @@ function uploadTransaction() {
     const transactionObjectStore = transaction.objectStore('new_transaction');
     const getAll = transactionObjectStore.getAll();
 
-    getAll.onsuccess = function() {
+    getAll.onsuccess = function () {
         if (getAll.result.length > 0) {
             fetch('/api/transaction', {
-              method: 'POST',
-              body: JSON.stringify(getAll.result),
-              headers: {
-                  Accept: 'application/json, text/plain, */*',
-                  'Content-Type': 'application/json'
-              }  
-            })
-            .then(response => response.json())
-            .then(serverResponse => {
-                if (serverResponse.message) {
-                    throw new Error(serverResponse);
+                method: 'POST',
+                body: JSON.stringify(getAll.result),
+                headers: {
+                    Accept: 'application/json, text/plain, */*',
+                    'Content-Type': 'application/json'
                 }
-                const transaction = db.transaction(['new_transaction'], 'readwrite');
-                const transactionObjectStore = transaction.objectStore('new_transaction');
-                transactionObjectStore.clear();
             })
-            .catch(err => {
-                console.log(err);
-            });
+                .then(response => response.json())
+                .then(serverResponse => {
+                    if (serverResponse.message) {
+                        throw new Error(serverResponse);
+                    }
+                    const transaction = db.transaction(['new_transaction'], 'readwrite');
+                    const transactionObjectStore = transaction.objectStore('new_transaction');
+                    transactionObjectStore.clear();
+                })
+                .catch(err => {
+                    console.log(err);
+                });
         }
     }
 }

@@ -4,9 +4,9 @@ const CACHE_NAME = APP_PREFIX + VERSION;
 const FILES_TO_CACHE = [
   // didn't include images as there is a cache limit in all browswers
   "./index.html",
-    "./css/styles.css",
-    "./js/idb.js",
-    "./js/index.js"
+  "./css/styles.css",
+  "./js/idb.js",
+  "./js/index.js"
 ];
 
 // retrieve items from the cache
@@ -44,11 +44,11 @@ self.addEventListener('activate', function (e) {
 
       // returns a Promise that resolves once all old versions of the cache have been deleted
       return Promise.all(keyList.map(function (key, i) {
-          if (cacheKeeplist.indexOf(key) === -1) {
-            console.log('deleting cache : ' + keyList[i]);
-            return caches.delete(keyList[i]);
-          }
-        })
+        if (cacheKeeplist.indexOf(key) === -1) {
+          console.log('deleting cache : ' + keyList[i]);
+          return caches.delete(keyList[i]);
+        }
+      })
       );
     })
   );

@@ -8,7 +8,7 @@ Deployed to Heroku at:
 
 # Screenshot
 
-![Screenshot]()
+![Screenshot](public\images\Capture.JPG)
 
 ## 🧐 Built With
 

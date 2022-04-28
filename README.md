@@ -20,7 +20,7 @@ Deployed to Heroku at:
 * MongoDB
 * Heroku
 
-## 🚀 About Me
+## 🚀 About Me!
 I'm a full stack developer and business manager specializing small businesses and startups.  I'm based in Austin, Texas. 
 
 ## 🔗 Links

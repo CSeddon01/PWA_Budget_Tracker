@@ -8,7 +8,7 @@ Deployed to Heroku at: https://warm-hamlet-80634.herokuapp.com/
 
 # Screenshot
 
-![Screenshot](public\images\Capture.JPG)
+![Screenshot](https://github.com/CSeddon01/PWA_Budget_Tracker/blob/main/public/images/Capture.JPG)
 
 ## 🧐 Built With
 

@@ -4,7 +4,7 @@ This is a Budget Tracker that allows users to keep track of their budget without
 
 # Deployment
 
-Deployed to Heroku at:
+Deployed to Heroku at
 
 # Screenshot
 
